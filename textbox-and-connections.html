@@ -21,6 +21,7 @@
       font-size: 12px;
       text-anchor: middle;
       alignment-baseline: middle;
+      fill: #fff; /* Set text color to white */
     }
 
     .connection {
@@ -95,15 +96,14 @@
 
     // Create connections and draw them
     connectionData.forEach(data => {
-        const box1 = textBoxes.find(box => box.name === data.start);
-        const box2 = textBoxes.find(box => box.name === data.end);
+      const box1 = textBoxes.find(box => box.name === data.start);
+      const box2 = textBoxes.find(box => box.name === data.end);
 
-        if (box1 && box2) {
-            const connection = new Connection(box1, box2);
-            connection.draw(svg);
-        }
+      if (box1 && box2) {
+        const connection = new Connection(box1, box2);
+        connection.draw(svg);
+      }
     });
-
   }
 
   const textBoxDataJSON = [
