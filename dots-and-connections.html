@@ -32,21 +32,6 @@
 <svg id="dot-sequence"></svg>
 
 <script>
-  const dotDataJSON = [
-    { "type": "dot", "name": "dot1", "x": "50", "y": "50" },
-    { "type": "dot", "name": "dot2", "x": "150", "y": "100" },
-    { "type": "dot", "name": "dot3", "x": "250", "y": "50" },
-    { "type": "dot", "name": "dot4", "x": "350", "y": "100" },
-    { "type": "dot", "name": "dot5", "x": "450", "y": "50" }
-  ];
-
-  const connectionDataJSON = [
-    { "start": "dot1", "end": "dot2" },
-    { "start": "dot2", "end": "dot3" },
-    { "start": "dot3", "end": "dot4" },
-    { "start": "dot4", "end": "dot5" }
-  ];
-
   class Dot {
     constructor(name, x, y) {
       this.name = name;
@@ -81,25 +66,44 @@
     }
   }
 
-  const svg = d3.select("#dot-sequence")
-    .attr("width", 500)
-    .attr("height", 150);
+  function composer(dotData, connectionData) {
+    const svg = d3.select("#dot-sequence")
+      .attr("width", 500)
+      .attr("height", 150);
 
-  const dots = dotDataJSON.map(data => new Dot(data.name, data.x, data.y));
+    const dots = dotData.map(data => new Dot(data.name, data.x, data.y));
 
-  // Create connections and draw them
-  connectionDataJSON.forEach(data => {
-    const dot1 = dots.find(dot => dot.name === data.start);
-    const dot2 = dots.find(dot => dot.name === data.end);
+    // Create connections and draw them
+    connectionData.forEach(data => {
+      const dot1 = dots.find(dot => dot.name === data.start);
+      const dot2 = dots.find(dot => dot.name === data.end);
 
-    if (dot1 && dot2) {
-      const connection = new Connection(dot1, dot2);
-      connection.draw(svg);
-    }
-  });
+      if (dot1 && dot2) {
+        const connection = new Connection(dot1, dot2);
+        connection.draw(svg);
+      }
+    });
 
-  // Draw dots after connections
-  dots.forEach(dot => dot.draw(svg));
+    // Draw dots after connections
+    dots.forEach(dot => dot.draw(svg));
+  }
+
+  const dotDataJSON = [
+    { "type": "dot", "name": "dot1", "x": "50", "y": "50" },
+    { "type": "dot", "name": "dot2", "x": "150", "y": "100" },
+    { "type": "dot", "name": "dot3", "x": "250", "y": "50" },
+    { "type": "dot", "name": "dot4", "x": "350", "y": "100" },
+    { "type": "dot", "name": "dot5", "x": "450", "y": "50" }
+  ];
+
+  const connectionDataJSON = [
+    { "start": "dot1", "end": "dot2" },
+    { "start": "dot2", "end": "dot3" },
+    { "start": "dot3", "end": "dot4" },
+    { "start": "dot4", "end": "dot5" }
+  ];
+
+  composer(dotDataJSON, connectionDataJSON);
 </script>
 
 </body>
