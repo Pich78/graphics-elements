@@ -14,14 +14,20 @@
     }
 
     .textbox {
-      fill: #3498db;
-      stroke: #2980b9;
-      stroke-width: 2;
       font-family: Arial, sans-serif;
       font-size: 12px;
       text-anchor: middle;
       alignment-baseline: middle;
+    }
+
+    .textbox .text {
       fill: #fff; /* Set text color to white */
+    }
+
+    .textbox .box {
+      fill: #3498db;
+      stroke: #2980b9;
+      stroke-width: 2;
     }
 
     .connection {
@@ -59,7 +65,7 @@
         .attr("y", bbox.y - 5) // Add padding to the top
         .attr("width", bbox.width + 10) // Add padding to both sides
         .attr("height", bbox.height + 10) // Add padding to both top and bottom
-        .attr("class", "textbox")
+        .attr("class", "textbox box")
         .attr("fill", "none")
         .attr("stroke", "#2980b9")
         .attr("stroke-width", 2);
