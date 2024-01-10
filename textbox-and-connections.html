@@ -20,12 +20,12 @@
       alignment-baseline: middle;
     }
 
-    .textbox .text {
+    .text {
       fill: #fff; /* Set text color to white */
     }
 
-    .textbox .box {
-      fill: #3498db;
+    .box {
+      fill: #3498db; /* Set box fill color */
       stroke: #2980b9;
       stroke-width: 2;
     }
@@ -53,22 +53,19 @@
 
     draw(svg) {
       const textElement = svg.append("text")
-        .attr("class", "textbox")
+        .attr("class", "textbox text")
         .attr("x", this.x)
         .attr("y", this.y)
         .text(this.text);
 
       const bbox = textElement.node().getBBox();
 
-      svg.insert("rect", ":first-child") // Insert rectangle as the first child
+      svg.append("rect") // Draw filled rectangle
         .attr("x", bbox.x - 5) // Add padding to the left
         .attr("y", bbox.y - 5) // Add padding to the top
         .attr("width", bbox.width + 10) // Add padding to both sides
         .attr("height", bbox.height + 10) // Add padding to both top and bottom
-        .attr("class", "textbox box")
-        .attr("fill", "none")
-        .attr("stroke", "#2980b9")
-        .attr("stroke-width", 2);
+        .attr("class", "textbox box");
     }
   }
 
