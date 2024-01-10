@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    svg {
+      display: block;
+    }
+
+    .rectangle {
+      fill: #3498db;
+      stroke: #2980b9;
+      stroke-width: 2;
+    }
+
+    .connection {
+      stroke: #e74c3c; /* Red color for connection */
+      stroke-width: 2;
+      stroke-dasharray: 5, 5; /* Add a dashed line effect */
+    }
+  </style>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+
+<svg id="dot-sequence"></svg>
+
+<script>
+  class Rectangle {
+    constructor(name, x, y) {
+      this.name = name;
+      this.x = parseInt(x); // Parse coordinates as integers
+      this.y = parseInt(y);
+    }
+
+    draw(svg) {
+      svg.append("rect")
+        .attr("class", "rectangle")
+        .attr("x", this.x - 8) // Adjust x to center the rectangle
+        .attr("y", this.y - 8) // Adjust y to center the rectangle
+        .attr("width", 16) // Rectangle width
+        .attr("height", 16); // Rectangle height
+    }
+  }
+
+  class Connection {
+    constructor(rect1, rect2) {
+      this.rect1 = rect1;
+      this.rect2 = rect2;
+    }
+
+    draw(svg) {
+      svg.insert("line", ":first-child") // Insert line as the first child
+        .attr("class", "connection")
+        .attr("x1", this.rect1.x)
+        .attr("y1", this.rect1.y)
+        .attr("x2", this.rect2.x)
+        .attr("y2", this.rect2.y)
+        .attr("stroke-dasharray", "5, 5") // Add dashed line effect
+        .attr("stroke", "#e74c3c"); // Set red color for connection
+    }
+  }
+
+  function composer(rectData, connectionData) {
+    const svg = d3.select("#dot-sequence")
+      .attr("width", 500)
+      .attr("height", 150);
+
+    const rectangles = rectData.map(data => new Rectangle(data.name, data.x, data.y));
+
+    // Create connections and draw them
+    connectionData.forEach(data => {
+      const rect1 = rectangles.find(rect => rect.name === data.start);
+      const rect2 = rectangles.find(rect => rect.name === data.end);
+
+      if (rect1 && rect2) {
+        const connection = new Connection(rect1, rect2);
+        connection.draw(svg);
+      }
+    });
+
+    // Draw rectangles after connections
+    rectangles.forEach(rect => rect.draw(svg));
+  }
+
+  const rectDataJSON = [
+    { "name": "rect1", "x": "50", "y": "50" },
+    { "name": "rect2", "x": "150", "y": "100" },
+    { "name": "rect3", "x": "250", "y": "50" },
+    { "name": "rect4", "x": "350", "y": "100" },
+    { "name": "rect5", "x": "450", "y": "50" }
+  ];
+
+  const connectionDataJSON = [
+    { "start": "rect1", "end": "rect2" },
+    { "start": "rect2", "end": "rect3" },
+    { "start": "rect3", "end": "rect4" },
+    { "start": "rect4", "end": "rect5" }
+  ];
+
+  composer(rectDataJSON, connectionDataJSON);
+</script>
+
+</body>
+</html>
