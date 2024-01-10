@@ -33,15 +33,23 @@
 
 <script>
   const dotDataJSON = [
-    { "type": "dot", "x": "50", "y": "50" },
-    { "type": "dot", "x": "150", "y": "100" },
-    { "type": "dot", "x": "250", "y": "50" },
-    { "type": "dot", "x": "350", "y": "100" },
-    { "type": "dot", "x": "450", "y": "50" }
+    { "type": "dot", "name": "dot1", "x": "50", "y": "50" },
+    { "type": "dot", "name": "dot2", "x": "150", "y": "100" },
+    { "type": "dot", "name": "dot3", "x": "250", "y": "50" },
+    { "type": "dot", "name": "dot4", "x": "350", "y": "100" },
+    { "type": "dot", "name": "dot5", "x": "450", "y": "50" }
+  ];
+
+  const connectionDataJSON = [
+    { "start": "dot1", "end": "dot2" },
+    { "start": "dot2", "end": "dot3" },
+    { "start": "dot3", "end": "dot4" },
+    { "start": "dot4", "end": "dot5" }
   ];
 
   class Dot {
-    constructor(x, y) {
+    constructor(name, x, y) {
+      this.name = name;
       this.x = parseInt(x); // Parse coordinates as integers
       this.y = parseInt(y);
     }
@@ -77,22 +85,18 @@
     .attr("width", 500)
     .attr("height", 150);
 
-  const dots = [];
-  const connections = [];
-  
-  // Parse JSON data and create Dot objects
-  dotDataJSON.forEach(data => {
-    if (data.type === "dot") {
-      dots.push(new Dot(data.x, data.y));
-    }
-  });
+  const dots = dotDataJSON.map(data => new Dot(data.name, data.x, data.y));
 
   // Create connections and draw them
-  for (let i = 0; i < dots.length - 1; i++) {
-    const connection = new Connection(dots[i], dots[i + 1]);
-    connections.push(connection);
-    connection.draw(svg);
-  }
+  connectionDataJSON.forEach(data => {
+    const dot1 = dots.find(dot => dot.name === data.start);
+    const dot2 = dots.find(dot => dot.name === data.end);
+
+    if (dot1 && dot2) {
+      const connection = new Connection(dot1, dot2);
+      connection.draw(svg);
+    }
+  });
 
   // Draw dots after connections
   dots.forEach(dot => dot.draw(svg));
