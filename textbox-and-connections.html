@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    svg {
+      display: block;
+    }
+
+    .textbox {
+      fill: #3498db;
+      stroke: #2980b9;
+      stroke-width: 2;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      text-anchor: middle;
+      alignment-baseline: middle;
+    }
+
+    .connection {
+      stroke: #e74c3c; /* Red color for connection */
+      stroke-width: 2;
+      stroke-dasharray: 5, 5; /* Add a dashed line effect */
+    }
+  </style>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+
+<svg id="dot-sequence"></svg>
+
+<script>
+  class TextBox {
+    constructor(name, x, y, text) {
+      this.name = name;
+      this.x = parseInt(x); // Parse coordinates as integers
+      this.y = parseInt(y);
+      this.text = text;
+    }
+
+    draw(svg) {
+      const textElement = svg.append("text")
+        .attr("class", "textbox")
+        .attr("x", this.x)
+        .attr("y", this.y)
+        .text(this.text);
+
+      const bbox = textElement.node().getBBox();
+
+      svg.insert("rect", ":first-child") // Insert rectangle as the first child
+        .attr("x", bbox.x - 5) // Add padding to the left
+        .attr("y", bbox.y - 5) // Add padding to the top
+        .attr("width", bbox.width + 10) // Add padding to both sides
+        .attr("height", bbox.height + 10) // Add padding to both top and bottom
+        .attr("class", "textbox")
+        .attr("fill", "none")
+        .attr("stroke", "#2980b9")
+        .attr("stroke-width", 2);
+    }
+  }
+
+  class Connection {
+    constructor(box1, box2) {
+      this.box1 = box1;
+      this.box2 = box2;
+    }
+
+    draw(svg) {
+      svg.insert("line", ":first-child") // Insert line as the first child
+        .attr("class", "connection")
+        .attr("x1", this.box1.x)
+        .attr("y1", this.box1.y)
+        .attr("x2", this.box2.x)
+        .attr("y2", this.box2.y)
+        .attr("stroke-dasharray", "5, 5") // Add dashed line effect
+        .attr("stroke", "#e74c3c"); // Set red color for connection
+    }
+  }
+
+  function composer(textBoxData, connectionData) {
+    const svg = d3.select("#dot-sequence")
+      .attr("width", 500)
+      .attr("height", 150);
+
+    const textBoxes = textBoxData.map(data => new TextBox(data.name, data.x, data.y, data.text));
+
+    // Create connections and draw them
+    connectionData.forEach(data => {
+      const box1 = textBoxes.find(box => box.name === data.start);
+      const box2 = textBoxes.find(box => box.name === data.end);
+
+      if (box1 && box2) {
+        const connection = new Connection(box1, box2);
+        connection.draw(svg);
+      }
+    });
+
+    // Draw text boxes after connections
+    textBoxes.forEach(box => box.draw(svg));
+  }
+
+  const textBoxDataJSON = [
+    { "name": "box1", "x": "50", "y": "50", "text": "Text 1" },
+    { "name": "box2", "x": "150", "y": "100", "text": "Text 2" },
+    { "name": "box3", "x": "250", "y": "50", "text": "Text 3" },
+    { "name": "box4", "x": "350", "y": "100", "text": "Text 4" },
+    { "name": "box5", "x": "450", "y": "50", "text": "Text 5" }
+  ];
+
+  const connectionDataJSON = [
+    { "start": "box1", "end": "box2" },
+    { "start": "box2", "end": "box3" },
+    { "start": "box3", "end": "box4" },
+    { "start": "box4", "end": "box5" }
+  ];
+
+  composer(textBoxDataJSON, connectionDataJSON);
+</script>
+
+</body>
+</html>
