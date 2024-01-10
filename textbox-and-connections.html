@@ -13,21 +13,25 @@
       display: block;
     }
 
-    .textbox {
-      font-family: Arial, sans-serif;
-      font-size: 12px;
+    .textBox {
       text-anchor: middle;
       alignment-baseline: middle;
     }
 
-    .text {
+    .textBox .text {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
       fill: #fff; /* Set text color to white */
     }
 
-    .box {
-      fill: #3498db; /* Set box fill color */
-      stroke: #2980b9;
-      stroke-width: 2;
+    .textBox .box {
+      fill: none; /* Transparent fill */
+    }
+
+    .textBox .debugBox {
+      fill: none; /* Transparent fill */
+      stroke-width: 0.5;
+      stroke: #ccc;
     }
 
     .connection {
@@ -43,7 +47,7 @@
 <svg id="dot-sequence"></svg>
 
 <script>
-  class TextBox {
+  class BoxArea {
     constructor(name, x, y, text) {
       this.name = name;
       this.x = parseInt(x); // Parse coordinates as integers
@@ -51,21 +55,28 @@
       this.text = text;
     }
 
-    draw(svg) {
+    draw(svg, showDebugBox) {
       const textElement = svg.append("text")
-        .attr("class", "textbox text")
+        .attr("class", "textBox text")
         .attr("x", this.x)
         .attr("y", this.y)
         .text(this.text);
 
       const bbox = textElement.node().getBBox();
 
-      svg.append("rect") // Draw filled rectangle
+      const boxElement = svg.append("rect")
         .attr("x", bbox.x - 5) // Add padding to the left
         .attr("y", bbox.y - 5) // Add padding to the top
         .attr("width", bbox.width + 10) // Add padding to both sides
         .attr("height", bbox.height + 10) // Add padding to both top and bottom
-        .attr("class", "textbox box");
+        .attr("class", showDebugBox ? "textBox debugBox" : "textBox box")
+        .style("stroke-width", showDebugBox ? 0.5 : 1) // Set stroke width to 0.5 in debug mode, 1 in normal mode
+        .style("stroke", showDebugBox ? "#ccc" : "#3498db"); // Set stroke color to gray in debug mode, blue in normal mode
+
+      // Additional styling for debug border
+      if (showDebugBox) {
+        boxElement.attr("stroke-dasharray", "1, 1"); // Make debug border continuous
+      }
     }
   }
 
@@ -87,29 +98,29 @@
     }
   }
 
-  function composer(textBoxData, connectionData) {
+  function composer(boxAreaData, connectionData, showDebugBox) {
     const svg = d3.select("#dot-sequence")
       .attr("width", 500)
       .attr("height", 150);
 
-    const textBoxes = textBoxData.map(data => new TextBox(data.name, data.x, data.y, data.text));
-
-    // Draw text boxes after connections
-    textBoxes.forEach(box => box.draw(svg));
+    const boxAreas = boxAreaData.map(data => new BoxArea(data.name, data.x, data.y, data.text));
 
     // Create connections and draw them
     connectionData.forEach(data => {
-      const box1 = textBoxes.find(box => box.name === data.start);
-      const box2 = textBoxes.find(box => box.name === data.end);
+      const box1 = boxAreas.find(box => box.name === data.start);
+      const box2 = boxAreas.find(box => box.name === data.end);
 
       if (box1 && box2) {
         const connection = new Connection(box1, box2);
         connection.draw(svg);
       }
     });
+
+    // Draw box areas after connections
+    boxAreas.forEach(box => box.draw(svg, showDebugBox));
   }
 
-  const textBoxDataJSON = [
+  const boxAreaDataJSON = [
     { "name": "box1", "x": "50", "y": "50", "text": "Text 1" },
     { "name": "box2", "x": "150", "y": "100", "text": "Text 2" },
     { "name": "box3", "x": "250", "y": "50", "text": "Text 3" },
@@ -124,7 +135,8 @@
     { "start": "box4", "end": "box5" }
   ];
 
-  composer(textBoxDataJSON, connectionDataJSON);
+  const showDebugBox = false; // Set to true to show debug boxes, false to hide
+  composer(boxAreaDataJSON, connectionDataJSON, showDebugBox);
 </script>
 
 </body>
