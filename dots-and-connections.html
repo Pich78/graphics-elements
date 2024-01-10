@@ -62,7 +62,7 @@
     }
 
     draw(svg) {
-      svg.append("line")
+      svg.insert("line", ":first-child") // Insert line as the first child
         .attr("class", "connection")
         .attr("x1", this.dot1.x)
         .attr("y1", this.dot1.y)
@@ -87,15 +87,15 @@
     }
   });
 
-  // Draw dots
-  dots.forEach(dot => dot.draw(svg));
-
   // Create connections and draw them
   for (let i = 0; i < dots.length - 1; i++) {
     const connection = new Connection(dots[i], dots[i + 1]);
     connections.push(connection);
     connection.draw(svg);
   }
+
+  // Draw dots after connections
+  dots.forEach(dot => dot.draw(svg));
 </script>
 
 </body>
