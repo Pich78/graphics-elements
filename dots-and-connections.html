@@ -32,10 +32,18 @@
 <svg id="dot-sequence"></svg>
 
 <script>
+  const dotDataJSON = [
+    { "type": "dot", "x": "50", "y": "50" },
+    { "type": "dot", "x": "150", "y": "100" },
+    { "type": "dot", "x": "250", "y": "50" },
+    { "type": "dot", "x": "350", "y": "100" },
+    { "type": "dot", "x": "450", "y": "50" }
+  ];
+
   class Dot {
     constructor(x, y) {
-      this.x = x;
-      this.y = y;
+      this.x = parseInt(x); // Parse coordinates as integers
+      this.y = parseInt(y);
     }
 
     draw(svg) {
@@ -64,25 +72,24 @@
     }
   }
 
-  const dotData = [
-    { x: 50, y: 50 },
-    { x: 150, y: 100 },
-    { x: 250, y: 50 },
-    { x: 350, y: 100 },
-    { x: 450, y: 50 }
-  ];
-
   const svg = d3.select("#dot-sequence")
     .attr("width", 500)
     .attr("height", 150);
 
-  const dots = dotData.map(coord => new Dot(coord.x, coord.y));
+  const dots = [];
   const connections = [];
   
+  // Parse JSON data and create Dot objects
+  dotDataJSON.forEach(data => {
+    if (data.type === "dot") {
+      dots.push(new Dot(data.x, data.y));
+    }
+  });
+
   // Draw dots
   dots.forEach(dot => dot.draw(svg));
 
-  // Draw connections
+  // Create connections and draw them
   for (let i = 0; i < dots.length - 1; i++) {
     const connection = new Connection(dots[i], dots[i + 1]);
     connections.push(connection);
