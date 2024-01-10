@@ -26,7 +26,38 @@
 <svg id="dot-sequence"></svg>
 
 <script>
-  // Data representing the coordinates of the dots
+  class Dot {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+    }
+
+    draw(svg) {
+      svg.append("circle")
+        .attr("class", "dot")
+        .attr("cx", this.x)
+        .attr("cy", this.y)
+        .attr("r", 5);
+    }
+  }
+
+  class Connection {
+    constructor(dot1, dot2) {
+      this.dot1 = dot1;
+      this.dot2 = dot2;
+    }
+
+    draw(svg) {
+      svg.append("line")
+        .attr("x1", this.dot1.x)
+        .attr("y1", this.dot1.y)
+        .attr("x2", this.dot2.x)
+        .attr("y2", this.dot2.y)
+        .attr("stroke", "#2980b9")
+        .attr("stroke-width", 2);
+    }
+  }
+
   const dotData = [
     { x: 50, y: 50 },
     { x: 150, y: 100 },
@@ -35,30 +66,22 @@
     { x: 450, y: 50 }
   ];
 
-  // Create SVG container
   const svg = d3.select("#dot-sequence")
     .attr("width", 500)
     .attr("height", 150);
 
+  const dots = dotData.map(coord => new Dot(coord.x, coord.y));
+  const connections = [];
+  
   // Draw dots
-  svg.selectAll(".dot")
-    .data(dotData)
-    .enter().append("circle")
-    .attr("class", "dot")
-    .attr("cx", d => d.x)
-    .attr("cy", d => d.y)
-    .attr("r", 5);
+  dots.forEach(dot => dot.draw(svg));
 
-  // Draw lines connecting the dots
-  svg.selectAll("line")
-    .data(dotData.slice(0, -1))
-    .enter().append("line")
-    .attr("x1", d => d.x)
-    .attr("y1", d => d.y)
-    .attr("x2", (d, i) => dotData[i + 1].x)
-    .attr("y2", (d, i) => dotData[i + 1].y)
-    .attr("stroke", "#2980b9")
-    .attr("stroke-width", 2);
+  // Draw connections
+  for (let i = 0; i < dots.length - 1; i++) {
+    const connection = new Connection(dots[i], dots[i + 1]);
+    connections.push(connection);
+    connection.draw(svg);
+  }
 </script>
 
 </body>
