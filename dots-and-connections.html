@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    svg {
+      display: block;
+    }
+
+    .dot {
+      fill: #3498db;
+      stroke: #2980b9;
+      stroke-width: 2;
+    }
+  </style>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+
+<svg id="dot-sequence"></svg>
+
+<script>
+  // Data representing the coordinates of the dots
+  const dotData = [
+    { x: 50, y: 50 },
+    { x: 150, y: 100 },
+    { x: 250, y: 50 },
+    { x: 350, y: 100 },
+    { x: 450, y: 50 }
+  ];
+
+  // Create SVG container
+  const svg = d3.select("#dot-sequence")
+    .attr("width", 500)
+    .attr("height", 150);
+
+  // Draw dots
+  svg.selectAll(".dot")
+    .data(dotData)
+    .enter().append("circle")
+    .attr("class", "dot")
+    .attr("cx", d => d.x)
+    .attr("cy", d => d.y)
+    .attr("r", 5);
+
+  // Draw lines connecting the dots
+  svg.selectAll("line")
+    .data(dotData.slice(0, -1))
+    .enter().append("line")
+    .attr("x1", d => d.x)
+    .attr("y1", d => d.y)
+    .attr("x2", (d, i) => dotData[i + 1].x)
+    .attr("y2", (d, i) => dotData[i + 1].y)
+    .attr("stroke", "#2980b9")
+    .attr("stroke-width", 2);
+</script>
+
+</body>
+</html>
