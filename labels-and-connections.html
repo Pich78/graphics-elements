@@ -62,19 +62,17 @@
 
       const bbox = textElement.node().getBBox();
 
-      const boxElement = svg.append("rect")
-        .attr("x", bbox.x)
-        .attr("y", bbox.y)
-        .attr("width", bbox.width)
-        .attr("height", bbox.height)
-        .attr("class", showDebugBox ? "label debugBox" : "label box")
-        .attr("fill", "none") // Set fill to none
-        .style("stroke-width", showDebugBox ? 0.5 : 0) // Set stroke width to 0.5 in debug mode, 0 in normal mode
-        .style("stroke", showDebugBox ? "#ccc" : "transparent"); // Set stroke color to gray in debug mode, transparent in normal mode
-
-      // Additional styling for debug border
       if (showDebugBox) {
-        boxElement.attr("stroke-dasharray", "1, 1"); // Make debug border continuous
+        const boxElement = svg.append("rect")
+          .attr("x", bbox.x)
+          .attr("y", bbox.y)
+          .attr("width", bbox.width)
+          .attr("height", bbox.height)
+          .attr("class", "label debugBox")
+          .attr("fill", "none") // Set fill to none
+          .style("stroke-width", 0.5)
+          .style("stroke", "#ccc")
+          .attr("stroke-dasharray", "1, 1");
       }
     }
   }
@@ -134,7 +132,7 @@
     { "start": "label4", "end": "label5" }
   ];
 
-  const showDebugBox = false; // Set to true to show debug boxes, false to hide
+  const showDebugBox = true; // Set to true to show debug boxes, false to hide
   composer(labelDataJSON, connectionDataJSON, showDebugBox);
 </script>
 
