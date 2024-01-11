@@ -47,7 +47,7 @@
       this.text = text;
     }
 
-    draw(svg, showDebugBox) {
+    draw(svg, showDebugBoundingBox) {
       const textElement = svg.append("text")
         .attr("class", "label")
         .attr("x", this.x)
@@ -56,7 +56,7 @@
 
       const bbox = textElement.node().getBBox();
 
-      if (showDebugBox) {
+      if (showDebugBoundingBox) {
         const debugBoundingBox = svg.append("rect")
           .attr("x", bbox.x)
           .attr("y", bbox.y)
@@ -89,7 +89,7 @@
     }
   }
 
-  function composer(labelData, connectionData, showDebugBox) {
+  function composer(labelData, connectionData, showDebugBoundingBox) {
     const svg = d3.select("#dot-sequence")
       .attr("width", 500)
       .attr("height", 150);
@@ -108,7 +108,7 @@
     });
 
     // Draw labels after connections
-    labels.forEach(label => label.draw(svg, showDebugBox));
+    labels.forEach(label => label.draw(svg, showDebugBoundingBox));
   }
 
   const labelDataJSON = [
@@ -126,8 +126,8 @@
     { "start": "label4", "end": "label5" }
   ];
 
-  const showDebugBox = true; // Set to true to show debug boxes, false to hide
-  composer(labelDataJSON, connectionDataJSON, showDebugBox);
+  const showDebugBoundingBox = true; // Set to true to show debug boxes, false to hide
+  composer(labelDataJSON, connectionDataJSON, showDebugBoundingBox);
 </script>
 
 </body>
