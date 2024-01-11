@@ -20,7 +20,7 @@
       font-size: 12px;
     }
 
-    .label .debugBox {
+    .label .debugBoundingBox {
       fill: transparent; /* Transparent fill */
       stroke-width: 0.5;
       stroke: #ccc;
@@ -57,12 +57,12 @@
       const bbox = textElement.node().getBBox();
 
       if (showDebugBox) {
-        const boxElement = svg.append("rect")
+        const debugBoundingBox = svg.append("rect")
           .attr("x", bbox.x)
           .attr("y", bbox.y)
           .attr("width", bbox.width)
           .attr("height", bbox.height)
-          .attr("class", "label debugBox")
+          .attr("class", "label debugBoundingBox")
           .attr("fill", "none") // Set fill to none
           .style("stroke-width", 0.5)
           .style("stroke", "#ccc")
