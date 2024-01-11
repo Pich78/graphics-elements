@@ -16,12 +16,8 @@
     .label {
       text-anchor: middle;
       alignment-baseline: middle;
-    }
-
-    .label .text {
       font-family: Arial, sans-serif;
       font-size: 12px;
-      fill: #fff; /* Set text color to white */
     }
 
     .label .box {
@@ -59,7 +55,7 @@
 
     draw(svg, showDebugBox) {
       const textElement = svg.append("text")
-        .attr("class", "label text")
+        .attr("class", "label")
         .attr("x", this.x)
         .attr("y", this.y)
         .text(this.text);
