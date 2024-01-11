@@ -25,11 +25,13 @@
     }
 
     .textBox .box {
-      fill: none; /* Transparent fill */
+      fill: transparent; /* Transparent fill */
+      stroke-width: 0;
+      stroke: transparent;
     }
 
     .textBox .debugBox {
-      fill: none; /* Transparent fill */
+      fill: transparent; /* Transparent fill */
       stroke-width: 0.5;
       stroke: #ccc;
     }
@@ -69,14 +71,6 @@
         .attr("y", bbox.y - 5) // Add padding to the top
         .attr("width", bbox.width + 10) // Add padding to both sides
         .attr("height", bbox.height + 10) // Add padding to both top and bottom
-        .attr("class", showDebugBox ? "textBox debugBox" : "textBox box")
-        .style("stroke-width", showDebugBox ? 0.5 : 1) // Set stroke width to 0.5 in debug mode, 1 in normal mode
-        .style("stroke", showDebugBox ? "#ccc" : "#3498db"); // Set stroke color to gray in debug mode, blue in normal mode
-
-      // Additional styling for debug border
-      if (showDebugBox) {
-        boxElement.attr("stroke-dasharray", "1, 1"); // Make debug border continuous
-      }
     }
   }
 
@@ -135,7 +129,7 @@
     { "start": "box4", "end": "box5" }
   ];
 
-  const showDebugBox = false; // Set to true to show debug boxes, false to hide
+  const showDebugBox = true; // Set to true to show debug boxes, false to hide
   composer(boxAreaDataJSON, connectionDataJSON, showDebugBox);
 </script>
 
