@@ -67,10 +67,10 @@
       const bbox = textElement.node().getBBox();
 
       const boxElement = svg.append("rect")
-        .attr("x", bbox.x - 5) // Add padding to the left
-        .attr("y", bbox.y - 5) // Add padding to the top
-        .attr("width", bbox.width + 10) // Add padding to both sides
-        .attr("height", bbox.height + 10) // Add padding to both top and bottom
+        .attr("x", bbox.x)
+        .attr("y", bbox.y)
+        .attr("width", bbox.width)
+        .attr("height", bbox.height)
         .attr("class", showDebugBox ? "textBox debugBox" : "textBox box")
         .attr("fill", "none") // Set fill to none
         .style("stroke-width", showDebugBox ? 0.5 : 0) // Set stroke width to 0.5 in debug mode, 0 in normal mode
