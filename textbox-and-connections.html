@@ -39,7 +39,7 @@
     .connection {
       stroke: #e74c3c; /* Red color for connection */
       stroke-width: 2;
-      stroke-dasharray: 5, 5; /* Add a dashed line effect */
+      stroke-dasharray: 5, 5; /* Add dashed line effect */
     }
   </style>
   <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -71,6 +71,15 @@
         .attr("y", bbox.y - 5) // Add padding to the top
         .attr("width", bbox.width + 10) // Add padding to both sides
         .attr("height", bbox.height + 10) // Add padding to both top and bottom
+        .attr("class", showDebugBox ? "textBox debugBox" : "textBox box")
+        .attr("fill", "none") // Set fill to none
+        .style("stroke-width", showDebugBox ? 0.5 : 0) // Set stroke width to 0.5 in debug mode, 0 in normal mode
+        .style("stroke", showDebugBox ? "#ccc" : "transparent"); // Set stroke color to gray in debug mode, transparent in normal mode
+
+      // Additional styling for debug border
+      if (showDebugBox) {
+        boxElement.attr("stroke-dasharray", "1, 1"); // Make debug border continuous
+      }
     }
   }
 
