@@ -20,10 +20,11 @@
       font-size: 12px;
     }
 
-    .label .debugBoundingBox {
-      fill: transparent; /* Transparent fill */
+    .debugBoundingBox {
+      fill: none; /* Transparent fill */
       stroke-width: 0.5;
       stroke: #ccc;
+      stroke-dasharray: 1, 1;
     }
 
     .connection {
@@ -57,16 +58,12 @@
       const bbox = textElement.node().getBBox();
 
       if (showDebugBoundingBox) {
-        const debugBoundingBox = svg.append("rect")
+        const debugBBox = svg.append("rect")
           .attr("x", bbox.x)
           .attr("y", bbox.y)
           .attr("width", bbox.width)
           .attr("height", bbox.height)
-          .attr("class", "label debugBoundingBox")
-          .attr("fill", "none") // Set fill to none
-          .style("stroke-width", 0.5)
-          .style("stroke", "#ccc")
-          .attr("stroke-dasharray", "1, 1");
+          .attr("class", "debugBoundingBox")
       }
     }
   }
