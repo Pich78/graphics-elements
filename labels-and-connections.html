@@ -20,7 +20,7 @@
       font-size: 12px;
     }
 
-    .label .debugBoundingBox {
+    .label.debugBoundingBox {
       fill: none; /* Transparent fill */
       stroke-width: 0.5;
       stroke: #ccc;
@@ -63,8 +63,7 @@
           .attr("y", bbox.y)
           .attr("width", bbox.width)
           .attr("height", bbox.height)
-          .attr("class", "debugBoundingBox")
-          .attr("id", "label");
+          .attr("class", "label debugBoundingBox")
       }
     }
   }
