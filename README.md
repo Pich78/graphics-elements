@@ -1,6 +1,8 @@
 # graphics-elements
 Collection of basic drawing elements
 
+https://css-tricks.com/svg-properties-and-css/
+
 In CSS, `.rectangle.contour` and `.rectangle .contour` are used to select elements for styling, but they target different elements.
 
 - `.rectangle.contour`: This is a **compound selector** that targets elements that have **both** `rectangle` and `contour` classes. For example, in `<div class="rectangle contour">`, this selector would apply.
