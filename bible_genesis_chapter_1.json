@@ -1,0 +1,45 @@
+{
+  "books": [
+    {
+      "name": "Genesi",
+      "chapters": [
+        {
+          "number": 1,
+          "verses": [
+            {"id": "Genesis.1.1", "text": "In principio Dio creò il cielo e la terra."},
+            {"id": "Genesis.1.2", "text": "Ora la terra era informe e deserta e le tenebre ricoprivano l'abisso e lo spirito di Dio aleggiava sulle acque."},
+            {"id": "Genesis.1.3", "text": "Dio disse: \"Sia la luce!\". E la luce fu."},
+            {"id": "Genesis.1.4", "text": "Dio vide che la luce era cosa buona e separò la luce dalle tenebre."},
+            {"id": "Genesis.1.5", "text": "e chiamò la luce giorno e le tenebre notte. E fu sera e fu mattina: primo giorno."},
+            {"id": "Genesis.1.6", "text": "Dio disse: \"Sia il firmamento in mezzo alle acque per separare le acque dalle acque\"."},
+            {"id": "Genesis.1.7", "text": "Dio fece il firmamento e separò le acque, che sono sotto il firmamento, dalle acque, che sono sopra il firmamento. E così avvenne."},
+            {"id": "Genesis.1.8", "text": "Dio chiamò il firmamento cielo. E fu sera e fu mattina: secondo giorno."},
+            {"id": "Genesis.1.9", "text": "Dio disse: \"Le acque che sono sotto il cielo, si raccolgano in un solo luogo e appaia l'asciutto\". E così avvenne."},
+            {"id": "Genesis.1.10", "text": "Dio chiamò l'asciutto terra e la massa delle acque mare. E Dio vide che era cosa buona."},
+            {"id": "Genesis.1.11", "text": "E Dio disse: \"La terra produca germogli, erbe che producono seme e alberi da frutto, che facciano sulla terra frutto con il seme, ciascuno secondo la sua specie\". E così avvenne:"},
+            {"id": "Genesis.1.12", "text": "la terra produsse germogli, erbe che producono seme, ciascuna secondo la propria specie e alberi che fanno ciascuno frutto con il seme, secondo la propria specie. Dio vide che era cosa buona."},
+            {"id": "Genesis.1.13", "text": "E fu sera e fu mattina: terzo giorno."},
+            {"id": "Genesis.1.14", "text": "Dio disse: \"Ci siano luci nel firmamento del cielo, per distinguere il giorno dalla notte; servano da segni per le stagioni, per i giorni e per gli anni\""},
+            {"id": "Genesis.1.15", "text": "e servano da luci nel firmamento del cielo per illuminare la terra. E così avvenne:"},
+            {"id": "Genesis.1.16", "text": "Dio fece le due luci grandi, la luce maggiore per regolare il giorno e la luce minore per regolare la notte, e le stelle."},
+            {"id": "Genesis.1.17", "text": "Dio le pose nel firmamento del cielo per illuminare la terra"},
+            {"id": "Genesis.1.18", "text": "e per regolare giorno e notte e per separare la luce dalle tenebre. E Dio vide che era cosa buona."},
+            {"id": "Genesis.1.19", "text": "E fu sera e fu mattina: quarto giorno."},
+            {"id": "Genesis.1.20", "text": "Dio disse: \"Le acque brulichino di esseri viventi e uccelli volino sopra la terra, davanti al firmamento del cielo\"."},
+            {"id": "Genesis.1.21", "text": "Dio creò i grandi mostri marini e tutti gli esseri viventi che guizzano e brulicano nelle acque, secondo la loro specie, e tutti gli uccelli alati secondo la loro specie. E Dio vide che era cosa buona."},
+            {"id": "Genesis.1.22", "text": "Dio li benedisse: \"Siate fecondi e moltiplicatevi e riempite le acque dei mari; gli uccelli si moltiplichino sulla terra\"."},
+            {"id": "Genesis.1.23", "text": "E fu sera e fu mattina: quinto giorno."},
+            {"id": "Genesis.1.24", "text": "Dio disse: \"La terra produca esseri viventi secondo la loro specie: bestiame, rettili e bestie selvatiche secondo la loro specie\". E così avvenne:"},
+            {"id": "Genesis.1.25", "text": "Dio fece le bestie selvatiche secondo la loro specie e il bestiame secondo la propria specie e tutti i rettili del suolo secondo la loro specie. E Dio vide che era cosa buona."},
+            {"id": "Genesis.1.26", "text": "E Dio disse: \"Facciamo l'uomo a nostra immagine, a nostra somiglianza, e domini sui pesci del mare e sugli uccelli del cielo, sul bestiame, su tutte le bestie selvatiche e su tutti i rettili che strisciano sulla terra\"."},
+            {"id": "Genesis.1.27", "text": "Dio creò l'uomo a sua immagine; a immagine di Dio lo creò; maschio e femmina li creò."},
+            {"id": "Genesis.1.28", "text": "Dio li benedisse e disse loro: \"Siate fecondi e moltiplicatevi, riempite la terra; soggiogatela e dominate sui pesci del mare e sugli uccelli del cielo e su ogni essere vivente che striscia sulla terra\"."},
+            {"id": "Genesis.1.29", "text": "Poi Dio disse: \"Ecco, io vi do ogni erba che produce seme e che è su tutta la terra e ogni albero in cui è il frutto, che produce seme: saranno il vostro cibo."},
+            {"id": "Genesis.1.30", "text": "A tutte le bestie selvatiche, a tutti gli uccelli del cielo e a tutti gli esseri che strisciano sulla terra e nei quali è alito di vita, io do in cibo ogni erba verde\". E così avvenne."},
+            {"id": "Genesis.1.31", "text": "Dio vide quanto aveva fatto, ed ecco, era cosa molto buona. E fu sera e fu mattina: sesto giorno."}
+          ]
+        }
+      ]
+    }
+  ]
+}
